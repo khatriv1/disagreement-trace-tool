@@ -163,25 +163,8 @@
   <h1>Qualitative coding review</h1>
   <p class="subtitle">Review similar-but-differently-coded pairs and divergent model reasonings.</p>
 
-  <section class="panel" id="panel-similar">
-    <h2>Panel 1 — Similar items, different codes</h2>
-    <p class="counter" id="p1-counter"></p>
-    <div class="pair-row" id="p1-pair"></div>
-    <p class="meta" id="p1-sim"></p>
-    <p class="prompt">These two look similar but were coded differently. Why do you think that is?</p>
-    <textarea id="p1-notes" placeholder="Your interpretation…"></textarea>
-    <div class="actions">
-      <button type="button" class="primary" id="p1-save">Save</button>
-      <button type="button" id="p1-next">Next pair</button>
-    </div>
-    <div class="saved-section">
-      <h3>Saved interpretations (this session)</h3>
-      <div class="saved-list" id="p1-saved"></div>
-    </div>
-  </section>
-
   <section class="panel" id="panel-reasoning">
-    <h2>Panel 2 — Reasoning disagreement on the same item</h2>
+    <h2>Panel 1 — Reasoning disagreement on the same item</h2>
     <p class="counter" id="p2-counter"></p>
     <div class="single-item" id="p2-item"></div>
     <div class="reasoning-row" id="p2-reasonings"></div>
@@ -195,6 +178,23 @@
     <div class="saved-section">
       <h3>Saved interpretations (this session)</h3>
       <div class="saved-list" id="p2-saved"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-similar">
+    <h2>Panel 2 — Similar items, different codes</h2>
+    <p class="counter" id="p1-counter"></p>
+    <div class="pair-row" id="p1-pair"></div>
+    <p class="meta" id="p1-sim"></p>
+    <p class="prompt">These two look similar but were coded differently. Why do you think that is?</p>
+    <textarea id="p1-notes" placeholder="Your interpretation…"></textarea>
+    <div class="actions">
+      <button type="button" class="primary" id="p1-save">Save</button>
+      <button type="button" id="p1-next">Next pair</button>
+    </div>
+    <div class="saved-section">
+      <h3>Saved interpretations (this session)</h3>
+      <div class="saved-list" id="p1-saved"></div>
     </div>
   </section>
 
@@ -240,14 +240,14 @@
       },
       {
         itemA: {
-          text: "tutor: We only have a few minutes left, so let's move on.",
-          human_code: "Time Management"
+          text: "tutor: Can you explain why you multiplied both sides by 2?",
+          human_code: "Understanding/Engagement-Tutor"
         },
         itemB: {
-          text: "tutor: That's great work — you're really getting this.",
-          human_code: "Encouragement"
+          text: "tutor: Can you explain why you divided both sides by 2?",
+          human_code: "Guiding feedback"
         },
-        similarity: 0.71
+        similarity: 0.86
       },
       {
         itemA: {
@@ -351,7 +351,7 @@
         '<div class="reasoning-block"><div class="agent-label">Model reasoning B</div>' +
           escapeHtml(ex.reasoningB) + '</div>';
       document.getElementById('p2-sim').textContent =
-        'Similarity between reasonings: ' + ex.similarity.toFixed(2);
+        'Cosine similarity between reasonings: ' + ex.similarity.toFixed(2);
       document.getElementById('p2-notes').value = '';
     }
 
