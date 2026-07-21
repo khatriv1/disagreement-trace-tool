@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qualitative coding review</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+      line-height: 1.5;
+      color: #222;
+      background: #fafafa;
+    }
+    h1 {
+      font-size: 1.35rem;
+      font-weight: normal;
+      margin: 0 0 0.35rem;
+      border-bottom: 2px solid #333;
+      padding-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    section.panel {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    section.panel h2 {
+      font-size: 1.1rem;
+      margin: 0 0 1rem;
+      color: #111;
+    }
+    .pair-row, .single-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .single-item { grid-template-columns: 1fr; }
+    .card {
+      border: 1px solid #ddd;
+      padding: 0.85rem 1rem;
+      background: #f9f9f9;
+      border-radius: 3px;
+    }
+    .card .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #666;
+      margin-bottom: 0.35rem;
+    }
+    .card .utterance {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .card .code {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #333;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: #444;
+      margin: 0.75rem 0 1rem;
+      padding: 0.5rem 0;
+      border-top: 1px dashed #ccc;
+    }
+    .reasoning-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .reasoning-block {
+      border: 1px solid #ddd;
+      padding: 0.85rem 1rem;
+      background: #f9f9f9;
+      border-radius: 3px;
+    }
+    .reasoning-block .agent-label {
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+      color: #444;
+    }
+    .prompt {
+      font-size: 0.95rem;
+      margin: 1rem 0 0.5rem;
+      font-style: italic;
+      color: #333;
+    }
+    textarea {
+      width: 100%;
+      min-height: 72px;
+      padding: 0.5rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      resize: vertical;
+    }
+    .actions {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    button {
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.85rem;
+      cursor: pointer;
+      border: 1px solid #666;
+      background: #eee;
+      border-radius: 3px;
+    }
+    button:hover { background: #ddd; }
+    button.primary { background: #333; color: #fff; border-color: #333; }
+    button.primary:hover { background: #444; }
+    .saved-section {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+    }
+    .saved-section h3 {
+      font-size: 0.9rem;
+      margin: 0 0 0.5rem;
+      font-weight: normal;
+      color: #555;
+    }
+    .saved-list {
+      font-size: 0.85rem;
+      color: #444;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+    .saved-list .entry {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .saved-list .entry:last-child { border-bottom: none; }
+    .counter {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .pair-row, .reasoning-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Qualitative coding review</h1>
+  <p class="subtitle">Review similar-but-differently-coded pairs and divergent model reasonings.</p>
+
+  <section class="panel" id="panel-similar">
+    <h2>Panel 1 — Similar items, different codes</h2>
+    <p class="counter" id="p1-counter"></p>
+    <div class="pair-row" id="p1-pair"></div>
+    <p class="meta" id="p1-sim"></p>
+    <p class="prompt">These two look similar but were coded differently. Why do you think that is?</p>
+    <textarea id="p1-notes" placeholder="Your interpretation…"></textarea>
+    <div class="actions">
+      <button type="button" class="primary" id="p1-save">Save</button>
+      <button type="button" id="p1-next">Next pair</button>
+    </div>
+    <div class="saved-section">
+      <h3>Saved interpretations (this session)</h3>
+      <div class="saved-list" id="p1-saved"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-reasoning">
+    <h2>Panel 2 — Reasoning disagreement on the same item</h2>
+    <p class="counter" id="p2-counter"></p>
+    <div class="single-item" id="p2-item"></div>
+    <div class="reasoning-row" id="p2-reasonings"></div>
+    <p class="meta" id="p2-sim"></p>
+    <p class="prompt">The two reasonings for this item diverge. Why might that be?</p>
+    <textarea id="p2-notes" placeholder="Your interpretation…"></textarea>
+    <div class="actions">
+      <button type="button" class="primary" id="p2-save">Save</button>
+      <button type="button" id="p2-next">Next item</button>
+    </div>
+    <div class="saved-section">
+      <h3>Saved interpretations (this session)</h3>
+      <div class="saved-list" id="p2-saved"></div>
+    </div>
+  </section>
+
+  <script>
+    /*
+     * PLACEHOLDER DATA — replace with Saga / dialog-move dataset exports.
+     * Shape: utterance text, human_code, and (for panel 2) two agent reasonings.
+     */
+
+    const SIMILAR_DIFFERENT_PAIRS = [
+      {
+        itemA: {
+          text: "tutor: Remember how we factored quadratics last week?",
+          human_code: "Aligning to prior knowledge"
+        },
+        itemB: {
+          text: "tutor: Do you remember what we did with the distributive property?",
+          human_code: "Understanding/Engagement-Tutor"
+        },
+        similarity: 0.82
+      },
+      {
+        itemA: {
+          text: "tutor: Go ahead and try the next problem on your own.",
+          human_code: "Instruction"
+        },
+        itemB: {
+          text: "tutor: Why don't you work through problem three while I watch?",
+          human_code: "Guiding feedback"
+        },
+        similarity: 0.79
+      },
+      {
+        itemA: {
+          text: "student: I think the answer is 12?",
+          human_code: "Student response"
+        },
+        itemB: {
+          text: "student: Would it be 12 here?",
+          human_code: "Understanding/Engagement-Student"
+        },
+        similarity: 0.88
+      },
+      {
+        itemA: {
+          text: "tutor: We only have a few minutes left, so let's move on.",
+          human_code: "Time Management"
+        },
+        itemB: {
+          text: "tutor: That's great work — you're really getting this.",
+          human_code: "Encouragement"
+        },
+        similarity: 0.71
+      },
+      {
+        itemA: {
+          text: "tutor: Can you unmute? I can't hear you.",
+          human_code: "Technical or Logistics"
+        },
+        itemB: {
+          text: "tutor: What step would you take next to isolate x?",
+          human_code: "Understanding/Engagement-Tutor"
+        },
+        similarity: 0.76
+      }
+    ];
+
+    const REASONING_DISAGREEMENT_ITEMS = [
+      {
+        text: "tutor: Remember what we said about factoring last time?",
+        human_code: "Aligning to prior knowledge",
+        reasoningA: "The tutor invokes a past session with 'remember,' anchoring the student to prior knowledge rather than asking a new content question.",
+        reasoningB: "This is a check-for-understanding question framed as recall; the question mark suggests probing whether the student still knows the concept.",
+        similarity: 0.38
+      },
+      {
+        text: "tutor: Not quite — look at how you combined like terms.",
+        human_code: "Guiding feedback",
+        reasoningA: "Direct evaluation of the student's work with a corrective cue about like terms.",
+        reasoningB: "Instruction to revise a specific step; the tutor is telling the student what to fix without explaining why.",
+        similarity: 0.42
+      },
+      {
+        text: "student: So I multiply both sides by 2?",
+        human_code: "Student response",
+        reasoningA: "The student proposes an operation; this is a substantive mathematical move in the dialogue.",
+        reasoningB: "Rising intonation and 'So' suggest the student is seeking confirmation, which fits engagement with tutor guidance.",
+        similarity: 0.35
+      },
+      {
+        text: "tutor: Why do you think we might multiply both sides by two?",
+        human_code: "Understanding/Engagement-Tutor",
+        reasoningA: "Open-ended why-question checking the student's reasoning about an algebraic step.",
+        reasoningB: "The tutor is implicitly instructing the student to perform multiplication; the question is rhetorical guidance toward the correct procedure.",
+        similarity: 0.41
+      },
+      {
+        text: "tutor: Hello, glad you could make it today.",
+        human_code: "Greeting",
+        reasoningA: "Salutation at session opening; social opener before instructional content.",
+        reasoningB: "Encouragement combined with greeting — affirms the student's attendance and sets a positive tone.",
+        similarity: 0.45
+      },
+      {
+        text: "tutor: Let's skip ahead since we're running short on time.",
+        human_code: "Time Management",
+        reasoningA: "Explicit reference to limited time and pacing decision to skip material.",
+        reasoningB: "Instruction to change activity; the primary move is directing what to do next, with time as background context.",
+        similarity: 0.33
+      }
+    ];
+
+    let p1Index = 0;
+    let p2Index = 0;
+    const savedP1 = [];
+    const savedP2 = [];
+
+    function renderCard(item, sideLabel) {
+      return (
+        '<div class="card">' +
+          '<div class="label">' + sideLabel + '</div>' +
+          '<div class="utterance">' + escapeHtml(item.text) + '</div>' +
+          '<div class="code">Human code: ' + escapeHtml(item.human_code) + '</div>' +
+        '</div>'
+      );
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function renderPanel1() {
+      const ex = SIMILAR_DIFFERENT_PAIRS[p1Index];
+      document.getElementById('p1-counter').textContent =
+        'Example ' + (p1Index + 1) + ' of ' + SIMILAR_DIFFERENT_PAIRS.length;
+      document.getElementById('p1-pair').innerHTML =
+        renderCard(ex.itemA, 'Item A') + renderCard(ex.itemB, 'Item B');
+      document.getElementById('p1-sim').textContent =
+        'Similarity (content + reasoning embeddings): ' + ex.similarity.toFixed(2);
+      document.getElementById('p1-notes').value = '';
+    }
+
+    function renderPanel2() {
+      const ex = REASONING_DISAGREEMENT_ITEMS[p2Index];
+      document.getElementById('p2-counter').textContent =
+        'Example ' + (p2Index + 1) + ' of ' + REASONING_DISAGREEMENT_ITEMS.length;
+      document.getElementById('p2-item').innerHTML =
+        renderCard({ text: ex.text, human_code: ex.human_code }, 'Utterance');
+      document.getElementById('p2-reasonings').innerHTML =
+        '<div class="reasoning-block"><div class="agent-label">Model reasoning A</div>' +
+          escapeHtml(ex.reasoningA) + '</div>' +
+        '<div class="reasoning-block"><div class="agent-label">Model reasoning B</div>' +
+          escapeHtml(ex.reasoningB) + '</div>';
+      document.getElementById('p2-sim').textContent =
+        'Similarity between reasonings: ' + ex.similarity.toFixed(2);
+      document.getElementById('p2-notes').value = '';
+    }
+
+    function renderSavedList(listEl, entries) {
+      if (entries.length === 0) {
+        listEl.innerHTML = '<em>No saved notes yet.</em>';
+        return;
+      }
+      listEl.innerHTML = entries.map(function (e, i) {
+        return '<div class="entry"><strong>#' + (i + 1) + '</strong> ' + escapeHtml(e) + '</div>';
+      }).join('');
+    }
+
+    document.getElementById('p1-save').addEventListener('click', function () {
+      const notes = document.getElementById('p1-notes').value.trim();
+      if (!notes) return;
+      const ex = SIMILAR_DIFFERENT_PAIRS[p1Index];
+      savedP1.push(
+        '[Pair ' + (p1Index + 1) + '] ' +
+        ex.itemA.human_code + ' vs ' + ex.itemB.human_code + ' — ' + notes
+      );
+      renderSavedList(document.getElementById('p1-saved'), savedP1);
+    });
+
+    document.getElementById('p1-next').addEventListener('click', function () {
+      p1Index = (p1Index + 1) % SIMILAR_DIFFERENT_PAIRS.length;
+      renderPanel1();
+    });
+
+    document.getElementById('p2-save').addEventListener('click', function () {
+      const notes = document.getElementById('p2-notes').value.trim();
+      if (!notes) return;
+      savedP2.push(
+        '[Item ' + (p2Index + 1) + '] ' +
+        REASONING_DISAGREEMENT_ITEMS[p2Index].human_code + ' — ' + notes
+      );
+      renderSavedList(document.getElementById('p2-saved'), savedP2);
+    });
+
+    document.getElementById('p2-next').addEventListener('click', function () {
+      p2Index = (p2Index + 1) % REASONING_DISAGREEMENT_ITEMS.length;
+      renderPanel2();
+    });
+
+    renderPanel1();
+    renderPanel2();
+    renderSavedList(document.getElementById('p1-saved'), savedP1);
+    renderSavedList(document.getElementById('p2-saved'), savedP2);
+  </script>
+</body>
+</html>
