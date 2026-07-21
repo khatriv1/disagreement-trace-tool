@@ -198,13 +198,14 @@
     </div>
   </section>
 
+  <script src="mockup_data.js"></script>
   <script>
     /*
      * PLACEHOLDER DATA — replace with Saga / dialog-move dataset exports.
      * Shape: utterance text, human_code, and (for panel 2) two agent reasonings.
      */
 
-    const SIMILAR_DIFFERENT_PAIRS = [
+    const PLACEHOLDER_SIMILAR_DIFFERENT_PAIRS = [
       {
         itemA: {
           text: "tutor: Remember how we factored quadratics last week?",
@@ -262,7 +263,7 @@
       }
     ];
 
-    const REASONING_DISAGREEMENT_ITEMS = [
+    const PLACEHOLDER_REASONING_DISAGREEMENT_ITEMS = [
       {
         text: "tutor: Remember what we said about factoring last time?",
         human_code: "Aligning to prior knowledge",
@@ -307,6 +308,16 @@
       }
     ];
 
+    const REASONING_DISAGREEMENT_ITEMS =
+      typeof window.PANEL1_DATA !== "undefined" && window.PANEL1_DATA.length
+        ? window.PANEL1_DATA
+        : PLACEHOLDER_REASONING_DISAGREEMENT_ITEMS;
+
+    const SIMILAR_DIFFERENT_PAIRS =
+      typeof window.PANEL2_DATA !== "undefined" && window.PANEL2_DATA.length
+        ? window.PANEL2_DATA
+        : PLACEHOLDER_SIMILAR_DIFFERENT_PAIRS;
+
     let p1Index = 0;
     let p2Index = 0;
     const savedP1 = [];
@@ -345,7 +356,16 @@
         'Example ' + (p2Index + 1) + ' of ' + REASONING_DISAGREEMENT_ITEMS.length;
       document.getElementById('p2-item').innerHTML =
         renderCard({ text: ex.text, human_code: ex.human_code }, 'Utterance');
+      var agentCodesLine = '';
+      if (ex.codesA != null && ex.codesB != null) {
+        agentCodesLine =
+          '<p class="meta" style="margin-bottom:0.75rem">' +
+          'Agent A codes: ' + escapeHtml(ex.codesA) +
+          ' | Agent B codes: ' + escapeHtml(ex.codesB) +
+          '</p>';
+      }
       document.getElementById('p2-reasonings').innerHTML =
+        agentCodesLine +
         '<div class="reasoning-block"><div class="agent-label">Model reasoning A</div>' +
           escapeHtml(ex.reasoningA) + '</div>' +
         '<div class="reasoning-block"><div class="agent-label">Model reasoning B</div>' +
