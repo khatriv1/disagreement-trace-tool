@@ -69,12 +69,12 @@ def make_system_prompt(name: str, personality: str) -> str:
     )
 
 
-def code_utterance(name: str, personality: str, text: str) -> str:
+def code_utterance(name: str, personality: str, text: str, model=MODEL) -> str:
     messages = [
         {"role": "system", "content": make_system_prompt(name, personality)},
         {"role": "user", "content": f"Utterance to code:\n{text}"},
     ]
-    return generate(MODEL, messages, {"temperature": 0.4})
+    return generate(model, messages, {"temperature": 0.4})
 
 
 def load_utterances(path: Path) -> list[str]:
