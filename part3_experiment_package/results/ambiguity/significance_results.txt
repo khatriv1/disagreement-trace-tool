@@ -1,0 +1,39 @@
+Significance — condition=ambiguity
+Bootstrap=2000 Permutation=2000
+Best post-revision round: 1 (kappa=0.5983)
+
+========================================================================
+(i) Round 0 vs Round 5
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.5632
+  Revised kappa:  0.5441
+  Observed diff (revised - baseline): -0.0191
+  Bootstrap 95% CI: [-0.0775, +0.0388]
+  Share bootstrap diff >= 0: 0.273
+  Permutation p (two-sided): 0.5265
+  VERDICT: no reliable difference between baseline and revised codebook
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=-0.0629  CI=[-0.1801, +0.0526]
+  VERDICT: no reliable UE kappa difference
+
+========================================================================
+(ii) Round 0 vs Round 1 (best)
+Round 0 vs round 1
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.5632
+  Revised kappa:  0.5983
+  Observed diff (revised - baseline): +0.0351
+  Bootstrap 95% CI: [-0.0238, +0.0943]
+  Share bootstrap diff >= 0: 0.877
+  Permutation p (two-sided): 0.2270
+  VERDICT: no reliable difference between baseline and revised codebook
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.0317  CI=[-0.0623, +0.1270]
+  VERDICT: no reliable UE kappa difference

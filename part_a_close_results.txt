@@ -1,0 +1,107 @@
+========================================================================
+PART A CLOSE — ambiguity vs label_disagree (decision-level)
+========================================================================
+
+Loaded datapoint_table.csv: 4686 rows total.
+Ambiguity-defined subset (positively-labeled decisions): n = 582.
+NOTE: all model tests below use this SAME ambiguity-defined subset for a fair comparison.
+llm_correct (agent A = human): mean = 0.5550
+label_disagree mean = 0.3505; ambiguity mean = 0.6227
+
+========================================================================
+1. CORRELATION: ambiguity vs label_disagree
+========================================================================
+  Raw-pooled (n=582):
+    Spearman r = -0.0076, p = 0.8543
+    Pearson  r = -0.0219, p = 0.5979
+  Within-dataset z-scored, then pooled:
+    Spearman r = -0.0435, p = 0.2951
+    Pearson  r = -0.0352, p = 0.3972
+
+========================================================================
+2. Does LABEL disagreement add BEYOND ambiguity?
+   Model 0: llm_correct ~ ambiguity + (1|item_id) + (1|code)
+   Model L: llm_correct ~ ambiguity + label_disagree + (1|item_id) + (1|code)
+========================================================================
+
+  Fitting via lme4 (Rscript) ...
+
+Model 0 fixed effects:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   0.3344    0.25594   1.307   0.1913
+ambiguity_z   0.0524    0.09323   0.562   0.5741
+
+Model L fixed effects:
+                 Estimate Std. Error z value  Pr(>|z|)
+(Intercept)        0.3378    0.23601  1.4311 1.524e-01
+ambiguity_z        0.0127    0.09831  0.1292 8.972e-01
+label_disagree_z  -0.5422    0.09778 -5.5452 2.936e-08
+
+LRT (anova):
+Data: df
+Models:
+m0: llm_correct ~ ambiguity_z + (1 | item_id) + (1 | code)
+mL: llm_correct ~ ambiguity_z + label_disagree_z + (1 | item_id) + (1 | code)
+   npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+m0    4 777.54 795.01 -384.77    769.54                         
+mL    5 743.18 765.01 -366.59    733.18 36.359  1  1.641e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+KEY: label_disagree_z  coef=-0.5422  SE=0.0978  z=-5.5452  p=0.0000
+LRT_P: 1.641306e-09 
+LL_0: -384.770749
+LL_L: -366.591314
+
+  label_disagree: coef=-0.5422, SE=0.0978, z=-5.5452, p=0.0000
+  Sign: NEGATIVE ✓ (expected: more disagreement/ambiguity → less correct)
+  LRT (Model L vs Model 0): p = 0.0000
+  VERDICT: YES — label_disagree adds significantly beyond ambiguity (LRT p=0.0000); NEGATIVE ✓ (expected: more disagreement/ambiguity → less correct)
+
+========================================================================
+3. How predictive is AMBIGUITY ON ITS OWN?
+   Model null: llm_correct ~ 1 + (1|item_id) + (1|code)
+   Model A:    llm_correct ~ ambiguity + (1|item_id) + (1|code)
+========================================================================
+
+  Fitting via lme4 (Rscript) ...
+
+Model null fixed effects:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   0.3278     0.2504   1.309   0.1904
+
+Model A fixed effects:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   0.3344    0.25594   1.307   0.1913
+ambiguity_z   0.0524    0.09323   0.562   0.5741
+
+LRT (anova):
+Data: df
+Models:
+mNull: llm_correct ~ 1 + (1 | item_id) + (1 | code)
+mA: llm_correct ~ ambiguity_z + (1 | item_id) + (1 | code)
+      npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)
+mNull    3 775.85 788.95 -384.92    769.85                     
+mA       4 777.54 795.01 -384.77    769.54 0.3055  1     0.5804
+
+KEY: ambiguity_z  coef=+0.0524  SE=0.0932  z=0.5620  p=0.5741
+LRT_P: 0.5804305 
+LL_null: -384.923519
+LL_A: -384.770749
+PSEUDO_R2: 0.000397
+
+  ambiguity: coef=+0.0524, SE=0.0932, z=0.5620, p=0.5741
+  Sign: POSITIVE ✗ (unexpected: more disagreement/ambiguity → more correct)
+  LRT (Model A vs intercept-only): p = 0.5804
+  McFadden-like pseudo-R² (vs null mixed model): 0.0004
+  VERDICT: NO — ambiguity alone is NOT a significant predictor (LRT p=0.5804, pseudo-R²=0.0004)
+
+========================================================================
+SUMMARY (plain language)
+========================================================================
+  1. Relatedness: ambiguity and label_disagree correlate Spearman r=-0.043 (z-scored within dataset, p=0.2951). They overlap only weakly.
+  2. Label beyond ambiguity: YES — label_disagree adds significantly beyond ambiguity (LRT p=0.0000); NEGATIVE ✓ (expected: more disagreement/ambiguity → less correct)
+  3. Ambiguity alone: NO — ambiguity alone is NOT a significant predictor (LRT p=0.5804, pseudo-R²=0.0004)
+
+  n = 582 ambiguity-defined decisions; descriptive. Tiny effects can reach significance at this n — interpret effect sizes.
+  Modelling: lme4 glmer (binomial), random intercepts for item_id + code.

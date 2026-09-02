@@ -1,0 +1,39 @@
+Significance — condition=results_bare_all_three_seed42
+Bootstrap=2000 Permutation=2000
+Best post-revision round: 4 (kappa=0.5630)
+
+========================================================================
+(i) Round 0 vs Round 5
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.4206
+  Revised kappa:  0.4808
+  Observed diff (revised - baseline): +0.0602
+  Bootstrap 95% CI: [-0.0039, +0.1228]
+  Share bootstrap diff >= 0: 0.964
+  Permutation p (two-sided): 0.0705
+  VERDICT: no reliable difference between baseline and revised codebook
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.2708  CI=[+0.1177, +0.4146]
+  VERDICT: UE revision reliably improves agreement
+
+========================================================================
+(ii) Round 0 vs Round 4 (best)
+Round 0 vs round 4
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.4206
+  Revised kappa:  0.5630
+  Observed diff (revised - baseline): +0.1423
+  Bootstrap 95% CI: [+0.0647, +0.2251]
+  Share bootstrap diff >= 0: 1.000
+  Permutation p (two-sided): 0.0000
+  VERDICT: revision reliably IMPROVES agreement with human gold
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.5170  CI=[+0.3676, +0.6625]
+  VERDICT: UE revision reliably improves agreement

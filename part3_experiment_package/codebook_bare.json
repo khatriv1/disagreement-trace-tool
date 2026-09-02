@@ -1,0 +1,11 @@
+{
+  "context": "This is online math tutoring. The goal is to code a set of common tutor dialog moves.",
+  "codes": {
+    "Greeting": "",
+    "Instruction": "",
+    "Guiding feedback": "",
+    "Aligning to prior knowledge": "",
+    "Understanding/Engagement-Tutor": "",
+    "Encouragement": ""
+  }
+}

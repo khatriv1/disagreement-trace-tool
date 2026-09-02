@@ -1,0 +1,15 @@
+Part 3 Experiment — condition=label_reasoning
+Reviser: qwen2.5:14b | Coders: qwen2.5:7b + llama3.1:8b
+Round-0 codebook: codebook_gpt_human.json (113 words)
+Signals: ['label', 'reasoning'] | N_matched=202
+
+round   pool_k      acc     UE_k  UE_TP  words  cases  chg
+----------------------------------------------------------
+    0   0.5693   0.9283   0.5900     38    113      0    0
+    1   0.4480   0.9055   0.3534     22     80    202    1
+    2   0.5213   0.9120   0.6548     46     79    202    1
+    3   0.4768   0.9070   0.4339     28     86    202    2
+    4   0.5695   0.9243   0.6799     51    106    202    1
+    5   0.5330   0.9159   0.6205     45     80    202    2
+
+TREND: pooled kappa FALLS (0.5693 -> 0.5330, delta=-0.0363)

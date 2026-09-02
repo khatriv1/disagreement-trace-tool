@@ -1,0 +1,11 @@
+code,dataset,def_word_count,behaviors,disagreement_rate
+process,chem,31,2,0.36
+plan,chem,18,1,0.195
+act,chem,31,2,0.32
+wrong,chem,26,1,0.135
+Greeting,tut,24,1,0.04747774480712166
+Instruction,tut,11,1,0.13649851632047477
+Guiding feedback,tut,25,2,0.41543026706231456
+Aligning to prior knowledge,tut,30,1,0.06824925816023739
+Understanding/Engagement-Tutor,tut,10,1,0.14836795252225518
+Encouragement,tut,12,1,0.04747774480712166

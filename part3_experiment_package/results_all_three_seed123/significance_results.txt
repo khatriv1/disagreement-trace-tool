@@ -1,0 +1,39 @@
+Significance — condition=results_all_three_seed123
+Bootstrap=2000 Permutation=2000
+Best post-revision round: 5 (kappa=0.5281)
+
+========================================================================
+(i) Round 0 vs Round 5
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.5430
+  Revised kappa:  0.5281
+  Observed diff (revised - baseline): -0.0149
+  Bootstrap 95% CI: [-0.0798, +0.0510]
+  Share bootstrap diff >= 0: 0.344
+  Permutation p (two-sided): 0.6600
+  VERDICT: no reliable difference between baseline and revised codebook
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.0952  CI=[-0.0321, +0.2226]
+  VERDICT: no reliable UE kappa difference
+
+========================================================================
+(ii) Round 0 vs Round 5 (best)
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.5430
+  Revised kappa:  0.5281
+  Observed diff (revised - baseline): -0.0149
+  Bootstrap 95% CI: [-0.0799, +0.0504]
+  Share bootstrap diff >= 0: 0.331
+  Permutation p (two-sided): 0.6575
+  VERDICT: no reliable difference between baseline and revised codebook
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.0952  CI=[-0.0305, +0.2265]
+  VERDICT: no reliable UE kappa difference

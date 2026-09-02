@@ -1,0 +1,5 @@
+code,human_kappa,agent_disagreement_rate
+act,0.77,0.32
+process,0.78,0.36
+plan,0.9,0.195
+wrong,1.0,0.135

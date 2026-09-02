@@ -1,0 +1,9 @@
+code,human_ones_count,agent_disagreement_rate
+Greeting,6,0.04747774480712166
+Instruction,85,0.13649851632047477
+Guiding feedback,29,0.41543026706231456
+Aligning to prior knowledge,13,0.06824925816023739
+Understanding/Engagement-Tutor,74,0.14836795252225518
+Technical or Logistics,11,0.01483679525222552
+Encouragement,14,0.04747774480712166
+Time Management,4,0.008902077151335312

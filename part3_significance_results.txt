@@ -1,0 +1,48 @@
+Part 3 Significance Test — Weak-Start Run
+Bootstrap resamples: 2000 | Permutation shuffles: 2000
+N utterances: 337 | N pooled decisions: 2022
+Best post-revision round: 3 (pooled kappa=0.5895)
+
+========================================================================
+(i) Round 0 vs Round 5 (baseline vs final)
+Comparison: round 0 (baseline) vs round 5 (revised)
+========================================================================
+
+POOLED (all code-decisions):
+  Baseline kappa (round 0):  0.6441
+  Revised kappa (round 5): 0.5274
+  Observed difference (revised - baseline): -0.1167
+  Bootstrap 95% CI of difference: [-0.1747, -0.0601]
+  Share of bootstrap resamples with diff >= 0: 0.001
+  Permutation p-value (two-sided): 0.0000
+  VERDICT: revision reliably REDUCES agreement with human gold
+
+Understanding/Engagement-Tutor (bootstrap only):
+  Baseline kappa: 0.8018
+  Revised kappa:  0.6276
+  Observed difference: -0.1742
+  Bootstrap 95% CI: [-0.2753, -0.0726]
+  Share bootstrap diff >= 0: 0.000
+  VERDICT: UE revision reliably reduces agreement
+
+========================================================================
+(ii) Round 0 vs Round 3 (baseline vs best post-revision)
+Comparison: round 0 (baseline) vs round 3 (revised)
+========================================================================
+
+POOLED (all code-decisions):
+  Baseline kappa (round 0):  0.6441
+  Revised kappa (round 3): 0.5895
+  Observed difference (revised - baseline): -0.0546
+  Bootstrap 95% CI of difference: [-0.1087, -0.0050]
+  Share of bootstrap resamples with diff >= 0: 0.018
+  Permutation p-value (two-sided): 0.0440
+  VERDICT: revision reliably REDUCES agreement with human gold
+
+Understanding/Engagement-Tutor (bootstrap only):
+  Baseline kappa: 0.8018
+  Revised kappa:  0.7256
+  Observed difference: -0.0762
+  Bootstrap 95% CI: [-0.1780, +0.0254]
+  Share bootstrap diff >= 0: 0.081
+  VERDICT: no reliable UE kappa difference (bootstrap CI spans zero)

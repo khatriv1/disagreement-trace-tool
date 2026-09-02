@@ -1,0 +1,60 @@
+========================================================================
+EMBEDDING REVISION ANALYSIS
+Model: all-MiniLM-L6-v2 (sentence-transformers)
+========================================================================
+
+RUNS USED:
+  + label -> ./part3_experiment_package/results/label
+  + reasoning -> ./part3_experiment_package/results/reasoning
+  + ambiguity -> ./part3_experiment_package/results/ambiguity
+  + all_three -> ./part3_experiment_package/results/all_three
+  + label_ambiguity -> ./part3_experiment_package/results/label_ambiguity
+  + label_reasoning -> ./part3_experiment_package/results/label_reasoning
+  + reasoning_ambiguity -> ./part3_experiment_package/results/reasoning_ambiguity
+  + bare_all_three_seed42 -> ./part3_experiment_package/results_bare_all_three_seed42
+  + bare_all_three_seed123 -> ./part3_experiment_package/results_bare_all_three_seed123
+  + bare_all_three_seed7 -> ./part3_experiment_package/results_bare_all_three_seed7
+
+RUNS SKIPPED:
+  (none)
+
+Total revision steps (with non-empty text changes): 47
+Unique runs: 10
+Helped (delta_kappa > 0): 22 / 47 (46.8%)
+
+========================================================================
+1) SANITY BASELINE — correlation with delta_kappa
+========================================================================
+  n_words_added (net codebook word-count change): Pearson r=0.3416 (p=0.0188), Spearman rho=0.2905 (p=0.0476)
+  n_codes_changed (definitions that differed): Pearson r=0.0439 (p=0.7693), Spearman rho=0.0550 (p=0.7133)
+  Plain-features LOO-CV ridge R² (words+codes): 0.0837
+  Plain-features LOO-CV accuracy: 0.5532
+  Plain-features LOO-CV AUC: 0.6145
+
+========================================================================
+2) EMBEDDING PREDICTION — leave-one-run-out CV
+========================================================================
+Embedding revision texts ...
+Embedding shape: 47 steps x 384 dims
+
+Regression (predict delta_kappa):
+  LOO-CV R² (embedding ridge): -0.3461
+  LOO-CV R² (plain words+codes ridge): 0.0837
+
+Classification (helped vs hurt, delta_kappa > 0):
+  Majority-class baseline accuracy: 0.5319 (predict always hurt)
+  LOO-CV accuracy (embedding): 0.6170
+  LOO-CV accuracy (plain words+codes): 0.5532
+  LOO-CV AUC (embedding): 0.6818
+  LOO-CV AUC (plain words+codes): 0.6145
+
+========================================================================
+3) SAMPLE SIZE & INTERPRETATION
+========================================================================
+N = 47 revision steps across 10 runs is small relative to embedding dimension (384). Expect high variance and risk of overfitting even with LOO-CV; treat results as exploratory, not confirmatory.
+
+VERDICT:
+  Embeddings show a slight edge over the plain baseline on one metric but not both; there is no strong evidence that revision-text embeddings predict help vs harm.
+
+Saved: revision_steps.csv
+Saved: embedding_revision_analysis.txt

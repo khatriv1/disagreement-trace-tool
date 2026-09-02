@@ -1,0 +1,13 @@
+dataset,code,human_kappa,agent_disagreement_rate
+chemistry,act,0.77,0.32
+chemistry,process,0.78,0.36
+chemistry,plan,0.9,0.195
+chemistry,wrong,1.0,0.135
+tutoring,Greeting,,0.04747774480712166
+tutoring,Instruction,,0.13649851632047477
+tutoring,Guiding feedback,,0.41543026706231456
+tutoring,Aligning to prior knowledge,,0.06824925816023739
+tutoring,Understanding/Engagement-Tutor,,0.14836795252225518
+tutoring,Technical or Logistics,,0.01483679525222552
+tutoring,Encouragement,,0.04747774480712166
+tutoring,Time Management,,0.008902077151335312

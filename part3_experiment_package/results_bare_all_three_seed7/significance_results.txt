@@ -1,0 +1,39 @@
+Significance — condition=results_bare_all_three_seed7
+Bootstrap=2000 Permutation=2000
+Best post-revision round: 5 (kappa=0.5621)
+
+========================================================================
+(i) Round 0 vs Round 5
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.3783
+  Revised kappa:  0.5621
+  Observed diff (revised - baseline): +0.1838
+  Bootstrap 95% CI: [+0.1145, +0.2557]
+  Share bootstrap diff >= 0: 1.000
+  Permutation p (two-sided): 0.0000
+  VERDICT: revision reliably IMPROVES agreement with human gold
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.4814  CI=[+0.3485, +0.6136]
+  VERDICT: UE revision reliably improves agreement
+
+========================================================================
+(ii) Round 0 vs Round 5 (best)
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.3783
+  Revised kappa:  0.5621
+  Observed diff (revised - baseline): +0.1838
+  Bootstrap 95% CI: [+0.1151, +0.2607]
+  Share bootstrap diff >= 0: 1.000
+  Permutation p (two-sided): 0.0000
+  VERDICT: revision reliably IMPROVES agreement with human gold
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.4814  CI=[+0.3535, +0.5998]
+  VERDICT: UE revision reliably improves agreement

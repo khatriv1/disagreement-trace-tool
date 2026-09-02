@@ -1,0 +1,39 @@
+Significance — condition=label
+Bootstrap=2000 Permutation=2000
+Best post-revision round: 2 (kappa=0.6258)
+
+========================================================================
+(i) Round 0 vs Round 5
+Round 0 vs round 5
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.5891
+  Revised kappa:  0.5263
+  Observed diff (revised - baseline): -0.0628
+  Bootstrap 95% CI: [-0.1286, -0.0007]
+  Share bootstrap diff >= 0: 0.024
+  Permutation p (two-sided): 0.0485
+  VERDICT: revision reliably REDUCES agreement with human gold
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.0096  CI=[-0.1069, +0.1234]
+  VERDICT: no reliable UE kappa difference
+
+========================================================================
+(ii) Round 0 vs Round 2 (best)
+Round 0 vs round 2
+========================================================================
+
+POOLED:
+  Baseline kappa: 0.5891
+  Revised kappa:  0.6258
+  Observed diff (revised - baseline): +0.0367
+  Bootstrap 95% CI: [-0.0212, +0.0976]
+  Share bootstrap diff >= 0: 0.896
+  Permutation p (two-sided): 0.2330
+  VERDICT: no reliable difference between baseline and revised codebook
+
+Understanding/Engagement-Tutor (bootstrap):
+  diff=+0.0878  CI=[-0.0245, +0.1882]
+  VERDICT: no reliable UE kappa difference

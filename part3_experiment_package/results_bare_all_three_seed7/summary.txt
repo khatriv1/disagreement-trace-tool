@@ -1,0 +1,17 @@
+Part 3 Experiment — condition=all_three
+Random seed: 7
+Reviser: qwen2.5:14b | Coders: qwen2.5:7b + llama3.1:8b
+Round-0 codebook: codebook_bare.json (0 definition words)
+Task context: This is online math tutoring. The goal is to code a set of common tutor dialog moves.
+Signals: ['label', 'reasoning', 'ambiguity'] | N_matched=202
+
+round   pool_k      acc     UE_k  UE_TP  words  cases  chg
+----------------------------------------------------------
+    0   0.3783   0.8917   0.1266      8      0      0    0
+    1   0.4342   0.8927   0.3983     26     59    202    6
+    2   0.4081   0.8937   0.2287     13     83    202    1
+    3   0.4832   0.9016   0.5338     36     83    202    1
+    4   0.4450   0.9016   0.4617     30     88    202    2
+    5   0.5621   0.9224   0.6080     42    121    202    1
+
+TREND: pooled kappa RISES (0.3783 -> 0.5621, delta=+0.1838)

@@ -1,0 +1,15 @@
+Part 3 all_three — seed replication comparison
+
+Seed 42 (original):  part3_experiment_package/results/all_three/
+Seed 123 (rerun):    part3_experiment_package/results_all_three_seed123/
+
+                    seed 42      seed 123
+Round 0 pooled k    0.5732       0.5430
+Best pooled k       0.6533 (r5)  0.5281 (r5)
+Final r5 pooled k   0.6533       0.5281
+r0 vs r5 delta      +0.0800      -0.0149
+Bootstrap 95% CI    [+0.018,+0.141]  [-0.080,+0.051]
+Permutation p       0.0115       0.660
+Verdict             improves     no reliable difference
+
+Conclusion: round-5 spike on seed 42 did NOT replicate on seed 123.

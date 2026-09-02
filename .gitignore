@@ -1,3 +1,28 @@
 .venv/
 __pycache__/
 llm-ta-consensus/
+other/
+SEND/
+ship_for_claude/
+finally_done/
+data_for_conrad*/
+*.zip
+lak24-coded-utterances.csv
+datapoint_table.csv
+rationale_cache.csv
+baseline_tutoring.csv
+data_ambiguity.csv
+*Transcript*.csv
+scored_round*.csv
+dual_agent_*.csv
+*cache*.csv
+revised_codebook_round*.json
+codebook_round0.json
+codebook_gpt_human.json
+part3_experiment_package/data/*
+!part3_experiment_package/data/README.txt
+"part3_multiround_results 2/"
+"part3_multiround_results 3/"
+"part3_weakstart_results 2/"
+_generate_repo_review.py
+repo_review.txt

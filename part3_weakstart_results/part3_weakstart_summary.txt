@@ -1,0 +1,22 @@
+Part 3 Weak-Start — LABEL | TUTORING
+Reviser: qwen2.5:14b (conservative) | Coders: qwen2.5:7b + llama3.1:8b
+Metric: Cohen's kappa (pooled + per-code); accuracy secondary
+Starting codebook: bare-bones weak definitions (49 words)
+Rounds: 0 baseline + 5 revisions
+
+round   pool_k      acc     UE_k  UE_TP  words  chg
+---------------------------------------------------
+    0   0.6441   0.9337   0.8018     63     49    0
+         UE FP/FN/TN: 12/11/251
+    1   0.5494   0.9189   0.6950     51    107    1
+         UE FP/FN/TN: 10/23/253
+    2   0.5804   0.9224   0.6964     49     84    2
+         UE FP/FN/TN: 7/25/256
+    3   0.5895   0.9248   0.7256     48    147    1
+         UE FP/FN/TN: 2/26/261
+    4   0.5625   0.9194   0.6766     50     69    2
+         UE FP/FN/TN: 11/24/252
+    5   0.5274   0.9184   0.6276     43    107    2
+         UE FP/FN/TN: 7/31/256
+
+TREND: pooled kappa FALLS (0.6441 -> 0.5274, delta=-0.1167) — revision did not help or hurt agreement with human gold
