@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Run LAK24 analytics and write mockup_data.js for mockup.html."""
+"""Run LAK24 analytics and write mockup_data.js for mockup.html.
+
+NOTE: mockup_data.js committed in this public repo is SYNTHETIC demo data (not real
+study utterances). Only run this script locally if you intentionally regenerate from
+private data; do not commit real utterances back to the public repository.
+"""
 
 import json
 import random
